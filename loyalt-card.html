@@ -68,6 +68,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-top: 20px;
     }
 
     button:hover {
@@ -82,16 +83,14 @@
   <div class="qr-container">
     <p>📲 Scan this code to access your loyalty card:</p>
 
-    <!-- 🔗 UPDATE this URL with your GitHub Pages link -->
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://yourusername.github.io/loyalty-card/loyalty-card.html" alt="QR Code">
+    <!-- ✅ QR Code points to your live site -->
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://pisalshravani.github.io/loyalty-card/loyalty-card.html" alt="QR Code">
 
-    <p class="note">Tip: Replace the QR code URL with your live GitHub Pages link above.</p>
+    <p class="note">Scan this to view and use your digital loyalty card from any device.</p>
   </div>
 
   <p>Click a circle to mark your visit!</p>
-  <div class="stars" id="starsContainer">
-    <!-- Stars will be generated here -->
-  </div>
+  <div class="stars" id="starsContainer"></div>
 
   <div id="freeMsg">🎉 You’ve earned a FREE appointment!</div>
 
