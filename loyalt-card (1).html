@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Glamour Tips Loyalty Card</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #fff0f5;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2.5em;
+    }
+
+    .qr-container {
+      margin: 20px 0;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 40px 0;
+    }
+
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #d63384;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background-color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .circle.filled {
+      background-color: #d63384;
+      color: white;
+    }
+
+    #freeMsg {
+      display: none;
+      font-size: 1.3em;
+      color: green;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .note {
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #c02575;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Glamour Tips Loyalty Card</h1>
+
+  <div class="qr-container">
+    <p>📲 Scan this code to access your loyalty card:</p>
+
+    <!-- ✅ QR Code points to your live site -->
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://pisalshravani.github.io/loyalty-card/loyalty-card.html" alt="QR Code">
+
+    <p class="note">Scan this to view and use your digital loyalty card from any device.</p>
+  </div>
+
+  <p>Click a circle to mark your visit!</p>
+  <div class="stars" id="starsContainer"></div>
+
+  <div id="freeMsg">🎉 You’ve earned a FREE appointment!</div>
+
+  <button onclick="resetStars()">Reset Card</button>
+
+  <script>
+    const container = document.getElementById("starsContainer");
+    const freeMsg = document.getElementById("freeMsg");
+    let stars = parseInt(localStorage.getItem("stars")) || 0;
+
+    function renderStars() {
+      container.innerHTML = "";
+      for (let i = 0; i < 6; i++) {
+        const star = document.createElement("div");
+        star.classList.add("circle");
+        if (i < stars) star.classList.add("filled");
+        star.textContent = i < stars ? "★" : "☆";
+
+        star.addEventListener("click", () => {
+          if (stars < 6) {
+            stars++;
+            localStorage.setItem("stars", stars);
+            renderStars();
+          }
+        });
+
+        container.appendChild(star);
+      }
+
+      freeMsg.style.display = stars >= 6 ? "block" : "none";
+    }
+
+    function resetStars() {
+      stars = 0;
+      localStorage.removeItem("stars");
+      renderStars();
+    }
+
+    renderStars();
+  </script>
+
+</body>
+</html>
